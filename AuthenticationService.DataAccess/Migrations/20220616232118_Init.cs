@@ -7,28 +7,28 @@ namespace AuthenticationService.DataAccess.Migrations
         protected override void Up(MigrationBuilder builder)
         {
             DropTables(builder);
-            var sql = @"create table dbo.SecurityUser(
-                        	Id int not null,
-                        	UserName nvarchar(500) not null,
-                        	Password nvarchar(max) not null,
-                            constraint PK_SecurityUser primary key clustered ( Id asc ),
-                            constraint UNIQUE_SecurityUser_UserName unique(UserName)
+            var sql = @"
+                        create table SecurityUser(
+                        Id int not null,
+                        UserName nvarchar(500) not null,
+                        Password nvarchar(max) not null,
+                        constraint PK_User primary key clustered ( Id asc ),
                         )
                         go
                         
                         create table SecurityRole(
                         	Id int not null,
                         	Name nvarchar(500) not null,
-                        	constraint PK_SecurityRole primary key clustered ( Id asc )
+                        	constraint PK_Role primary key clustered ( Id asc )
                         )
-                        
                         go
                         
                         create table SecurityUserRole(
                         	SecurityUserId int not null,
                         	SecurityRoleId int not null,
-                        	constraint FK_SecurityRole_SecurityUserId foreign key (SecurityUserId) references SecurityUser (Id),
-                        	constraint FK_SecurityRole_SecurityRoleId foreign key (SecurityRoleId) references SecurityRole (Id)
+                            constraint PK_UserRole primary key clustered ( SecurityUserId,  SecurityRoleId ),
+                        	constraint FK_UserRole_UserId foreign key (SecurityUserId) references [SecurityUser] (Id),
+                        	constraint FK_UserRole_RoleId foreign key (SecurityRoleId) references [SecurityRole] (Id)
                         )
                         go
                         ";
