@@ -12,7 +12,7 @@ To generate the solution file and run the service pease do the following steps:
         ```      
     3. Add ea nuget source
         ```
-        dotnet nuget add source https://artifactory.ea.com/artifactory/api/nuget/v3/gdw-nuget-virtual --name GDW
+        dotnet nuget add source
         ```
     
     4. Check read access to frostbite resource at http://uap.ea.com/
@@ -20,7 +20,6 @@ To generate the solution file and run the service pease do the following steps:
     5. Run the command
         ```
         dotnet script cadet.service\.crucible\gensln.csx
-        ```
 
 
 ## Web Interface 
